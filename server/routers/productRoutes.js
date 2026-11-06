@@ -34,14 +34,24 @@ router.post(
   }
 )
 
-router.post("/", createProduct)
+router.post(
+  "/",
+  protect,
+  authorizeRoles("entrepreneur", "admin"),
+  createProduct
+)
 
-router.put("/:id", updateProduct)
+router.put(
+  "/:id",
+  protect,
+  authorizeRoles("entrepreneur", "admin"),
+  updateProduct
+)
 
 router.delete(
   "/:id",
   protect,
-  authorizeRoles("admin"),
+  authorizeRoles("entrepreneur", "admin"),
   deleteProduct
 )
 

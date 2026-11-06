@@ -1,12 +1,24 @@
+
 const User = require("../models/User")
 const bcrypt = require("bcryptjs")
 const jwt = require("jsonwebtoken")
 
+// Register User
 const registerUser = async (req, res) => {
   try {
     const { name, email, password, phone, role } = req.body
 
-    const existingUser = await User.findOne({ email })
+    if (!name || !email || !password) {
+      return res.status(400).json({
+        message: "Name, email and password are required",
+      })
+    }
+
+    const normalizedEmail = email.trim().toLowerCase()
+
+    const existingUser = await User.findOne({
+      email: normalizedEmail,
+    })
 
     if (existingUser) {
       return res.status(400).json({
@@ -17,11 +29,11 @@ const registerUser = async (req, res) => {
     const hashedPassword = await bcrypt.hash(password, 10)
 
     const user = await User.create({
-      name,
-      email,
+      name: name.trim(),
+      email: normalizedEmail,
       password: hashedPassword,
-      phone,
-      role,
+      phone: phone || "",
+      role: role || "customer",
     })
 
     res.status(201).json({
@@ -30,9 +42,11 @@ const registerUser = async (req, res) => {
         id: user._id,
         name: user.name,
         email: user.email,
+        phone: user.phone,
         role: user.role,
       },
     })
+
   } catch (error) {
     res.status(500).json({
       message: "Registration failed",
@@ -41,11 +55,16 @@ const registerUser = async (req, res) => {
   }
 }
 
+// Login User
 const loginUser = async (req, res) => {
   try {
     const { email, password } = req.body
 
-    const user = await User.findOne({ email })
+    const normalizedEmail = email.trim().toLowerCase()
+
+    const user = await User.findOne({
+      email: normalizedEmail,
+    })
 
     if (!user) {
       return res.status(400).json({
@@ -53,7 +72,17 @@ const loginUser = async (req, res) => {
       })
     }
 
-    const isMatch = await bcrypt.compare(password, user.password)
+    // Check account status
+    if (user.isActive === false) {
+      return res.status(403).json({
+        message: "Your account is deactivated. Please contact support.",
+      })
+    }
+
+    const isMatch = await bcrypt.compare(
+      password,
+      user.password
+    )
 
     if (!isMatch) {
       return res.status(400).json({
@@ -79,9 +108,13 @@ const loginUser = async (req, res) => {
         id: user._id,
         name: user.name,
         email: user.email,
+        phone: user.phone,
+        address: user.address,
+        profileImage: user.profileImage,
         role: user.role,
       },
     })
+
   } catch (error) {
     res.status(500).json({
       message: "Login failed",
@@ -90,6 +123,7 @@ const loginUser = async (req, res) => {
   }
 }
 
+// Get Current User
 const getCurrentUser = async (req, res) => {
   try {
     const user = await User.findById(req.user.id).select("-password")
@@ -103,6 +137,7 @@ const getCurrentUser = async (req, res) => {
     res.json({
       user,
     })
+
   } catch (error) {
     res.status(500).json({
       message: "Failed to fetch user",
@@ -110,7 +145,6 @@ const getCurrentUser = async (req, res) => {
     })
   }
 }
-
 
 module.exports = {
   registerUser,

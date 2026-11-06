@@ -19,6 +19,8 @@ import AdminEntrepreneurs from "./pages/AdminEntrepreneurs"
 import AdminProducts from "./pages/AdminProducts"
 import Review from "./pages/Review"
 import ManageCustomers from "./pages/ManageCustomers"
+import Profile from "./pages/Profile"
+import CreateBusinessProfile from "./pages/CreateBusinessProfile"
 
 function App() {
   return (
@@ -91,7 +93,16 @@ function App() {
           path="/admin/customers"
           element={<ManageCustomers />}
         />
-        <Route path="/review/:orderId" element={<Review />} />
+        <Route path="/review/:orderId" 
+        element={<Review />}
+         />
+         <Route path="/profile" 
+         element={<Profile />} 
+         />
+        <Route
+          path="/create-business-profile"
+          element={<CreateBusinessProfile />}
+        /> 
 
       </Routes>
 

@@ -69,6 +69,12 @@ function Navbar() {
 
         {user ? (
           <>
+          <Link
+            to="/profile"
+            className="font-medium text-gray-700 hover:text-green-700"
+          >
+            My Profile
+          </Link>
             <span className="font-semibold text-green-700">
               Hi, {user.name}
             </span>

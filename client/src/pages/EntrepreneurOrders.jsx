@@ -44,7 +44,7 @@ function EntrepreneurOrders() {
     }
 
     fetchOrders()
-  }, [navigate, token, user])
+  }, [navigate, token])
 
   const updateOrderStatus = async (orderId, status) => {
     try {

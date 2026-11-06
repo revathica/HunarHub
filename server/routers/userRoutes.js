@@ -5,6 +5,9 @@ const {
   getAllCustomers,
   updateCustomer,
   deleteCustomer,
+  getMyProfile,
+  updateMyProfile,
+  deactivateMyAccount,
 } = require("../controllers/userController")
 
 const {
@@ -44,6 +47,23 @@ router.delete(
   protect,
   authorizeRoles("admin"),
   deleteCustomer
+)
+// Logged-in user's profile
+router.get("/me",
+   protect,
+    getMyProfile
+  )
+
+// Update own profile
+router.put("/me",
+   protect,
+    updateMyProfile
+  )
+
+// Deactivate own account
+router.put("/deactivate", 
+  protect, 
+  deactivateMyAccount
 )
 
 module.exports = router

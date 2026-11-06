@@ -1,5 +1,7 @@
 const Product = require("../models/Product")
+const Entrepreneur = require("../models/Entrepreneur")
 
+// Get all products
 const getProducts = async (req, res) => {
   try {
     const products = await Product.find().populate(
@@ -16,6 +18,7 @@ const getProducts = async (req, res) => {
   }
 }
 
+// Get single product
 const getProductById = async (req, res) => {
   try {
     const product = await Product.findById(req.params.id).populate(
@@ -38,9 +41,41 @@ const getProductById = async (req, res) => {
   }
 }
 
+// Create product
 const createProduct = async (req, res) => {
   try {
-    const product = await Product.create(req.body)
+    const userId = req.user.id || req.user._id
+    let entrepreneurId = req.body.entrepreneurId
+
+    // Entrepreneur can add products only to their own business
+    if (req.user.role === "entrepreneur") {
+      const entrepreneur = await Entrepreneur.findOne({ userId })
+
+      if (!entrepreneur) {
+        return res.status(404).json({
+          message: "Entrepreneur profile not found",
+        })
+      }
+
+      entrepreneurId = entrepreneur._id
+    }
+
+    if (!entrepreneurId) {
+      return res.status(400).json({
+        message: "Entrepreneur ID is required",
+      })
+    }
+
+    const product = await Product.create({
+      entrepreneurId,
+      name: req.body.name,
+      description: req.body.description,
+      price: req.body.price,
+      category: req.body.category,
+      stock: req.body.stock,
+      isAvailable: req.body.isAvailable,
+      image: req.body.image,
+    })
 
     res.status(201).json({
       message: "Product created successfully",
@@ -54,19 +89,50 @@ const createProduct = async (req, res) => {
   }
 }
 
+// Update product
 const updateProduct = async (req, res) => {
   try {
-    const product = await Product.findByIdAndUpdate(
-      req.params.id,
-      req.body,
-      { new: true, runValidators: true }
-    )
+    const product = await Product.findById(req.params.id)
 
     if (!product) {
       return res.status(404).json({
         message: "Product not found",
       })
     }
+
+    // Check ownership for entrepreneur
+    if (req.user.role === "entrepreneur") {
+      const entrepreneur = await Entrepreneur.findOne({
+        userId: req.user.id || req.user._id,
+      })
+
+      if (
+        !entrepreneur ||
+        product.entrepreneurId.toString() !== entrepreneur._id.toString()
+      ) {
+        return res.status(403).json({
+          message: "You can only edit your own products",
+        })
+      }
+    }
+
+    const allowedFields = [
+      "name",
+      "description",
+      "price",
+      "category",
+      "stock",
+      "isAvailable",
+      "image",
+    ]
+
+    allowedFields.forEach((field) => {
+      if (req.body[field] !== undefined) {
+        product[field] = req.body[field]
+      }
+    })
+
+    await product.save()
 
     res.json({
       message: "Product updated successfully",
@@ -80,15 +146,34 @@ const updateProduct = async (req, res) => {
   }
 }
 
+// Delete product
 const deleteProduct = async (req, res) => {
   try {
-    const product = await Product.findByIdAndDelete(req.params.id)
+    const product = await Product.findById(req.params.id)
 
     if (!product) {
       return res.status(404).json({
         message: "Product not found",
       })
     }
+
+    // Check ownership for entrepreneur
+    if (req.user.role === "entrepreneur") {
+      const entrepreneur = await Entrepreneur.findOne({
+        userId: req.user.id || req.user._id,
+      })
+
+      if (
+        !entrepreneur ||
+        product.entrepreneurId.toString() !== entrepreneur._id.toString()
+      ) {
+        return res.status(403).json({
+          message: "You can only delete your own products",
+        })
+      }
+    }
+
+    await Product.findByIdAndDelete(req.params.id)
 
     res.json({
       message: "Product deleted successfully",
