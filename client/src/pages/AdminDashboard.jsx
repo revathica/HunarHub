@@ -11,6 +11,7 @@ function AdminDashboard() {
 
   const [loading, setLoading] = useState(true)
   const [verifyingId, setVerifyingId] = useState("")
+  const [statusUpdatingId, setStatusUpdatingId] = useState("")
   const [editingProduct, setEditingProduct] = useState(null)
 
   useEffect(() => {
@@ -126,6 +127,94 @@ function AdminDashboard() {
     }
   }
 
+
+const handleToggleUserStatus = async (userId, currentStatus) => {
+  const token = localStorage.getItem("token")
+
+  const newStatus = !currentStatus
+
+  const confirmAction = window.confirm(
+    `Are you sure you want to ${newStatus ? "activate" : "deactivate"} this account?`
+  )
+
+  if (!confirmAction) return
+
+  try {
+    setStatusUpdatingId(userId)
+
+    const response = await fetch(
+      `http://localhost:5000/api/users/${userId}/status`,
+      {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({
+          isActive: newStatus,
+        }),
+      }
+    )
+
+    const data = await response.json()
+
+    if (!response.ok) {
+      throw new Error(data.message || "Failed to update account")
+    }
+
+    setUsers((current) =>
+      current.map((item) =>
+        item._id === userId
+          ? { ...item, isActive: newStatus }
+          : item
+      )
+    )
+
+    alert(data.message)
+  } catch (error) {
+    console.error(error)
+    alert(error.message)
+  } finally {
+    setStatusUpdatingId("")
+  }
+}
+// DELETE USER
+const handleDeleteUser = async (userId) => {
+  const token = localStorage.getItem("token")
+
+  const confirmDelete = window.confirm(
+    "Are you sure you want to permanently delete this user?"
+  )
+
+  if (!confirmDelete) return
+
+  try {
+    const response = await fetch(
+      `http://localhost:5000/api/users/${userId}`,
+      {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    )
+
+    const data = await response.json()
+
+    if (!response.ok) {
+      throw new Error(data.message || "Failed to delete user")
+    }
+
+    setUsers((current) =>
+      current.filter((user) => user._id !== userId)
+    )
+
+    alert("User deleted successfully")
+  } catch (error) {
+    console.error(error)
+    alert(error.message)
+  }
+}
   // =========================
   // DELETE PRODUCT
   // =========================
@@ -379,7 +468,114 @@ function AdminDashboard() {
 
         </div>
 
-          
+       
+{/* USER ACCOUNT MANAGEMENT */}
+
+<div className="mt-6 rounded-xl bg-white p-6 shadow">
+
+  <h2 className="mb-4 text-xl font-bold text-gray-800">
+    User Account Management
+  </h2>
+
+  <div className="mb-5 grid gap-4 sm:grid-cols-2">
+
+    <div className="rounded-lg bg-green-50 p-4">
+      <p className="text-sm text-gray-600">Active Accounts</p>
+      <p className="text-2xl font-bold text-green-700">
+        {users.filter((user) => user.isActive !== false && user.role !== "admin").length}
+      </p>
+    </div>
+
+    <div className="rounded-lg bg-red-50 p-4">
+      <p className="text-sm text-gray-600">Inactive Accounts</p>
+      <p className="text-2xl font-bold text-red-700">
+        {users.filter((user) => user.isActive === false).length}
+      </p>
+    </div>
+
+  </div>
+
+  {users.filter((user) => user.role !== "admin").length === 0 ? (
+    <p className="text-gray-500">No users found.</p>
+  ) : (
+
+    <div className="space-y-4">
+
+      {users
+        .filter((user) => user.role !== "admin")
+        .map((user) => (
+
+          <div
+            key={user._id}
+            className="flex flex-col gap-4 rounded-lg border p-4 md:flex-row md:items-center md:justify-between"
+          >
+
+            <div>
+              <h3 className="font-bold text-gray-800">
+                {user.name}
+              </h3>
+
+              <p className="text-sm text-gray-600">
+                {user.email}
+              </p>
+
+              <p className="text-sm text-gray-600">
+                Role: {user.role}
+              </p>
+
+              <span
+                className={`mt-2 inline-block rounded-full px-3 py-1 text-xs font-semibold ${
+                  user.isActive !== false
+                    ? "bg-green-100 text-green-700"
+                    : "bg-red-100 text-red-700"
+                }`}
+              >
+                {user.isActive !== false ? "Active" : "Inactive"}
+              </span>
+            </div>
+
+            <div>
+              <button
+                onClick={() =>
+                  handleToggleUserStatus(
+                    user._id,
+                    user.isActive !== false
+                  )
+                }
+                disabled={statusUpdatingId === user._id}
+                className={`rounded-lg px-4 py-2 font-semibold text-white disabled:opacity-50 ${
+                  user.isActive !== false
+                    ? "bg-red-600 hover:bg-red-700"
+                    : "bg-green-600 hover:bg-green-700"
+                }`}
+              >
+                {statusUpdatingId === user._id
+                  ? "Updating..."
+                  : user.isActive !== false
+                  ? "Deactivate"
+                  : "Activate"}
+              </button>
+
+
+              <button
+                onClick={() => handleDeleteUser(user._id)}
+                className="mt-2 rounded-lg bg-red-700 px-4 py-2 font-semibold text-white hover:bg-red-800"
+              >
+                
+                Delete User
+              </button>
+            </div>
+
+          </div>
+
+        ))}
+
+    </div>
+
+  )}
+
+</div>
+   
   
         {/* =========================
             ENTREPRENEUR VERIFICATION

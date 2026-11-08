@@ -10,7 +10,9 @@ const getUserId = (req) => {
 // Get all users (Admin)
 const getAllUsers = async (req, res) => {
   try {
-    const users = await User.find().select("-password")
+    const users = await User.find({
+        isDeleted: { $ne: true },
+      }).select("-password")
     res.json(users)
     } catch (error) {
     console.error("GET PROFILE ERROR:", error)
@@ -231,6 +233,94 @@ const updateMyProfile = async (req, res) => {
   }
 }
 
+// Activate / Deactivate User (Admin)
+const toggleUserStatus = async (req, res) => {
+  try {
+    const { isActive } = req.body
+
+    const user = await User.findById(req.params.id)
+
+    if (!user) {
+      return res.status(404).json({
+        message: "User not found",
+      })
+    }
+
+    if (user.role === "admin") {
+      return res.status(403).json({
+        message: "Admin account status cannot be changed",
+      })
+    }
+
+    if (typeof isActive !== "boolean") {
+      return res.status(400).json({
+        message: "Valid account status is required",
+      })
+    }
+
+    user.isActive = isActive
+    await user.save()
+
+    res.json({
+      message: isActive
+        ? "User activated successfully"
+        : "User deactivated successfully",
+      user: await User.findById(user._id).select("-password"),
+    })
+  } catch (error) {
+    res.status(500).json({
+      message: "Failed to update user status",
+      error: error.message,
+    })
+  }
+}
+
+// Soft Delete User (Admin)
+const softDeleteUser = async (req, res) => {
+  try {
+    const user = await User.findById(req.params.id)
+
+    if (!user) {
+      return res.status(404).json({
+        message: "User not found",
+      })
+    }
+    // Prevent deleted users from being activated
+    if (user.isDeleted === true) {
+      return res.status(403).json({
+        message: "Deleted accounts cannot be activated.",
+      })
+    }
+
+    if (user.role === "admin") {
+      return res.status(403).json({
+        message: "Admin account cannot be deleted",
+      })
+    }
+
+    if (user.isDeleted) {
+      return res.status(400).json({
+        message: "User is already deleted",
+      })
+    }
+
+    user.isDeleted = true
+    user.isActive = false
+
+    await user.save()
+
+    res.json({
+      message: "User deleted successfully",
+    })
+  } catch (error) {
+    res.status(500).json({
+      message: "Failed to delete user",
+      error: error.message,
+    })
+  }
+}
+
+
 // Deactivate own account
 const deactivateMyAccount = async (req, res) => {
   try {
@@ -272,4 +362,6 @@ module.exports = {
   getMyProfile,
   updateMyProfile,
   deactivateMyAccount,
+  toggleUserStatus,
+  softDeleteUser,
 }

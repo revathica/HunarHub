@@ -72,12 +72,19 @@ const loginUser = async (req, res) => {
       })
     }
 
-    // Check account status
-    if (user.isActive === false) {
-      return res.status(403).json({
-        message: "Your account is deactivated. Please contact support.",
-      })
-    }
+    // Check deleted account
+if (user.isDeleted === true) {
+  return res.status(403).json({
+    message: "Your account has been deleted.",
+  })
+}
+
+// Check deactivated account
+if (user.isActive === false) {
+  return res.status(403).json({
+    message: "Your account is deactivated. Please contact support.",
+  })
+}
 
     const isMatch = await bcrypt.compare(
       password,

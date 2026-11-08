@@ -8,6 +8,8 @@ const {
   getMyProfile,
   updateMyProfile,
   deactivateMyAccount,
+  toggleUserStatus,
+  softDeleteUser,
 } = require("../controllers/userController")
 
 const {
@@ -47,6 +49,20 @@ router.delete(
   protect,
   authorizeRoles("admin"),
   deleteCustomer
+)
+// Activate / Deactivate User (Admin)
+router.put(
+  "/:id/status",
+  protect,
+  authorizeRoles("admin"),
+  toggleUserStatus
+)
+// Soft Delete User (Admin)
+router.delete(
+  "/:id",
+  protect,
+  authorizeRoles("admin"),
+  softDeleteUser
 )
 // Logged-in user's profile
 router.get("/me",

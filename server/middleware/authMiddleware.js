@@ -25,11 +25,19 @@ const protect = async (req, res, next) => {
       })
     }
 
-    if (user.isActive === false) {
-      return res.status(403).json({
-        message: "Your account is deactivated. Please contact support.",
-      })
-    }
+    // Check deleted account
+if (user.isDeleted === true) {
+  return res.status(403).json({
+    message: "Your account has been deleted.",
+  })
+}
+
+// Check inactive account
+if (user.isActive === false) {
+  return res.status(403).json({
+    message: "Your account is deactivated. Please contact support.",
+  })
+}
 
     req.user = {
       id: user._id.toString(),
