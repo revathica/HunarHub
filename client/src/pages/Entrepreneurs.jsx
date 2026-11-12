@@ -1,12 +1,14 @@
 import { useEffect, useState } from "react"
-import { Link } from "react-router-dom"
+import { Link, useSearchParams} from "react-router-dom"
 
 function Entrepreneurs() {
   const [entrepreneurs, setEntrepreneurs] = useState([])
   const [entrepreneurRatings, setEntrepreneurRatings] = useState({})
   const [search, setSearch] = useState("")
-  const [category, setCategory] = useState("All")
+  const [searchParams] = useSearchParams()
+  const [category, setCategory] = useState( searchParams.get("category") || "All")
   const [loading, setLoading] = useState(true)
+  
 
   useEffect(() => {
     const fetchEntrepreneurs = async () => {

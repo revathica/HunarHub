@@ -68,7 +68,11 @@ function Register() {
           Join HunarHub today
         </p>
 
-        <form onSubmit={handleSubmit} className="mt-6 space-y-4">
+        <form
+          onSubmit={handleSubmit}
+          autoComplete="off"
+          className="mt-6 space-y-4"
+        >
 
           <div>
             <label className="mb-2 block font-medium text-gray-700">
@@ -94,6 +98,7 @@ function Register() {
               type="email"
               required
               value={email}
+              autoComplete="off"
               onChange={(e) => setEmail(e.target.value)}
               placeholder="Enter your email"
               className="w-full rounded-lg border px-4 py-3 outline-none focus:border-green-600"
@@ -124,6 +129,7 @@ function Register() {
               type="password"
               required
               value={password}
+              autoComplete="new-password"
               onChange={(e) => setPassword(e.target.value)}
               placeholder="Create a password"
               className="w-full rounded-lg border px-4 py-3 outline-none focus:border-green-600"
