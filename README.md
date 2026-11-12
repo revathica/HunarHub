@@ -206,3 +206,8 @@ The backend provides REST API modules for:
 ## Author
 
 Developed as part of the Unified Mentor internship program to promote local businesses and empower micro-entrepreneurs through digital technology.
+## Project Demo Video
+
+Watch the HunarHub Project Demo:
+
+[Click Here to Watch Demo Video] https://youtu.be/LzC7SpU4ZTQ
