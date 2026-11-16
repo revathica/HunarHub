@@ -6,7 +6,54 @@ function MyOrders() {
   const [orders, setOrders] = useState([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState("")
+  const [updatingOrderId, setUpdatingOrderId] = useState(null)
 
+const confirmDelivery = async (orderId) => {
+  const token = localStorage.getItem("token")
+
+  if (!token) {
+    navigate("/login")
+    return
+  }
+
+  try {
+    setUpdatingOrderId(orderId)
+
+    const response = await fetch(
+      `http://localhost:5000/api/orders/${orderId}`,
+      {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({
+          status: "completed",
+        }),
+      }
+    )
+
+    const data = await response.json()
+
+    if (!response.ok) {
+      throw new Error(data.message || "Failed to confirm delivery")
+    }
+
+    setOrders((previousOrders) =>
+      previousOrders.map((order) =>
+        order._id === orderId
+          ? { ...order, status: "completed" }
+          : order
+      )
+    )
+
+    alert("Delivery confirmed successfully!")
+  } catch (error) {
+    alert(error.message)
+  } finally {
+    setUpdatingOrderId(null)
+  }
+}
   useEffect(() => {
     const fetchOrders = async () => {
       const token = localStorage.getItem("token")
@@ -135,6 +182,17 @@ function MyOrders() {
                     >
                       {order.status}
                     </span>
+                    {order.status === "delivered" && (
+                      <button
+                        onClick={() => confirmDelivery(order._id)}
+                        disabled={updatingOrderId === order._id}
+                        className="mt-3 rounded-lg bg-green-600 px-5 py-2 font-semibold text-white hover:bg-green-700 disabled:opacity-50"
+                      >
+                        {updatingOrderId === order._id
+                          ? "Confirming..."
+                          : "Confirm Delivery"}
+                      </button>
+                    )}
                   </div>
 
                 </div>

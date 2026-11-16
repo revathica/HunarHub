@@ -24,7 +24,7 @@ router.get("/:id", protect, getOrderById)
 router.put(
   "/:id",
   protect,
-  authorizeRoles("admin", "entrepreneur"),
+  authorizeRoles("admin", "entrepreneur", "customer"),
   updateOrder,
  )
 

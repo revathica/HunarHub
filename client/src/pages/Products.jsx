@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 
 function Products() {
+  const navigate = useNavigate()
   const [products, setProducts] = useState([])
   const [productRatings, setProductRatings] = useState({})
   const [search, setSearch] = useState("")
@@ -213,14 +214,22 @@ useEffect(() => {
                     </p>
                   )}
 
-                  <div className="mt-5">
-                    {user && user.role === "customer" && (
+                <div className="mt-5">
                   <button
                     onClick={() => {
+                      if (!user) {
+                        alert("Please login to add products to cart!")
+                        navigate("/login")
+                        return
+                      }
+
+                      if (user.role !== "customer") {
+                        alert("Only customers can add products to cart!")
+                        return
+                      }
+
                       const savedCart = localStorage.getItem("cart")
-                      const cart = savedCart
-                        ? JSON.parse(savedCart)
-                        : []
+                      const cart = savedCart ? JSON.parse(savedCart) : []
 
                       const existingItem = cart.find(
                         (item) => item._id === product._id
@@ -233,8 +242,7 @@ useEffect(() => {
                           item._id === product._id
                             ? {
                                 ...item,
-                                cartQuantity:
-                                  item.cartQuantity + 1,
+                                cartQuantity: item.cartQuantity + 1,
                               }
                             : item
                         )
@@ -248,19 +256,15 @@ useEffect(() => {
                         ]
                       }
 
-                      localStorage.setItem(
-                        "cart",
-                        JSON.stringify(updatedCart)
-                      )
-
+                      localStorage.setItem("cart", JSON.stringify(updatedCart))
                       alert("Product added to cart!")
                     }}
                     className="w-full rounded-lg bg-green-600 px-4 py-3 font-semibold text-white hover:bg-green-700"
                   >
                     Add to Cart
                   </button>
-                )}
-                  </div>
+                </div>
+
 
                 </div>
 

@@ -245,8 +245,10 @@ function EntrepreneurOrders() {
                     </p>
                   </div>
 
-                  <div className="flex flex-wrap gap-2">
+                  
+                <div className="flex flex-wrap gap-2">
 
+                  {order.status === "pending" && (
                     <button
                       onClick={() =>
                         updateOrderStatus(order._id, "confirmed")
@@ -255,7 +257,9 @@ function EntrepreneurOrders() {
                     >
                       Confirm
                     </button>
+                  )}
 
+                  {order.status === "confirmed" && (
                     <button
                       onClick={() =>
                         updateOrderStatus(order._id, "processing")
@@ -264,16 +268,20 @@ function EntrepreneurOrders() {
                     >
                       Processing
                     </button>
+                  )}
 
+                  {order.status === "processing" && (
                     <button
                       onClick={() =>
-                        updateOrderStatus(order._id, "completed")
+                        updateOrderStatus(order._id, "delivered")
                       }
                       className="rounded-lg bg-green-600 px-4 py-2 text-sm font-semibold text-white hover:bg-green-700"
                     >
-                      Completed
+                      Mark as Delivered
                     </button>
+                  )}
 
+                  {["pending", "confirmed", "processing"].includes(order.status) && (
                     <button
                       onClick={() =>
                         updateOrderStatus(order._id, "cancelled")
@@ -282,8 +290,9 @@ function EntrepreneurOrders() {
                     >
                       Cancel
                     </button>
+                  )}
 
-                  </div>
+                </div>
 
                 </div>
 

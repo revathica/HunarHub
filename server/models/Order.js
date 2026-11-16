@@ -58,6 +58,7 @@ const orderSchema = new mongoose.Schema(
         "pending",
         "confirmed",
         "processing",
+        "delivered",
         "completed",
         "cancelled",
       ],
