@@ -1,3 +1,4 @@
+
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 
@@ -222,6 +223,28 @@ function Checkout() {
               <span className="text-2xl font-bold text-green-700">
                 ₹{totalAmount}
               </span>
+
+            </div>
+
+            {/* Payment Information */}
+            <div className="mt-6 rounded-xl border border-green-200 bg-green-50 p-4">
+
+              <h3 className="font-bold text-gray-800">
+                Payment Method
+              </h3>
+
+              <p className="mt-3 font-semibold text-green-700">
+                💵 Cash on Delivery (COD)
+              </p>
+
+              <p className="mt-2 text-sm text-gray-600">
+                Cash on Delivery is available. Pay directly
+                to the entrepreneur when your order is delivered.
+              </p>
+
+              <p className="mt-2 text-xs text-gray-500">
+                Online Payment is currently unavailable.
+              </p>
 
             </div>
 
