@@ -20,7 +20,7 @@ function ManageCustomers() {
 
     try {
       const response = await fetch(
-        "http://localhost:5000/api/users/customers",
+        "https://hunarhub-backend-hiv6.onrender.com/api/users/customers",
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -61,7 +61,7 @@ function ManageCustomers() {
       setSaving(true)
 
       const response = await fetch(
-        `http://localhost:5000/api/users/customers/${editingCustomer._id}`,
+        `https://hunarhub-backend-hiv6.onrender.com/api/users/customers/${editingCustomer._id}`,
         {
           method: "PUT",
           headers: {
@@ -116,7 +116,7 @@ function ManageCustomers() {
       setDeletingId(customerId)
 
       const response = await fetch(
-        `http://localhost:5000/api/users/customers/${customerId}`,
+        `https://hunarhub-backend-hiv6.onrender.com/api/users/customers/${customerId}`,
         {
           method: "DELETE",
           headers: {

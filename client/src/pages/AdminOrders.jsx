@@ -20,7 +20,7 @@ function AdminOrders() {
     const fetchOrders = async () => {
       try {
         const response = await fetch(
-          "http://localhost:5000/api/orders",
+          "https://hunarhub-backend-hiv6.onrender.com/api/orders",
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -54,7 +54,7 @@ function AdminOrders() {
       setUpdatingId(orderId)
 
       const response = await fetch(
-        `http://localhost:5000/api/orders/${orderId}`,
+        `https://hunarhub-backend-hiv6.onrender.com/api/orders/${orderId}`,
         {
           method: "PUT",
           headers: {
@@ -104,7 +104,7 @@ function AdminOrders() {
     setDeletingId(orderId)
 
     const response = await fetch(
-      `http://localhost:5000/api/orders/${orderId}`,
+      `https://hunarhub-backend-hiv6.onrender.com/api/orders/${orderId}`,
       {
         method: "DELETE",
         headers: {

@@ -27,7 +27,7 @@ function ProductDashboard() {
     const fetchMyData = async () => {
       try {
         const response = await fetch(
-          "http://localhost:5000/api/users/me",
+          "https://hunarhub-backend-hiv6.onrender.com/api/users/me",
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -49,7 +49,7 @@ function ProductDashboard() {
         setEntrepreneur(data.entrepreneurProfile)
 
         const productResponse = await fetch(
-          "http://localhost:5000/api/products"
+          "https://hunarhub-backend-hiv6.onrender.com/api/products"
         )
 
         const productData = await productResponse.json()
@@ -116,7 +116,7 @@ function ProductDashboard() {
 
     try {
       const response = await fetch(
-        "http://localhost:5000/api/products/upload-image",
+        "https://hunarhub-backend-hiv6.onrender.com/api/products/upload-image",
         {
           method: "POST",
           headers: {
@@ -182,8 +182,8 @@ function ProductDashboard() {
       }
 
       const url = editingId
-        ? `http://localhost:5000/api/products/${editingId}`
-        : "http://localhost:5000/api/products"
+        ? `https://hunarhub-backend-hiv6.onrender.com/api/products/${editingId}`
+        : "https://hunarhub-backend-hiv6.onrender.com/api/products"
 
       const response = await fetch(url, {
         method: editingId ? "PUT" : "POST",
@@ -220,7 +220,7 @@ function ProductDashboard() {
   const fetchMyProducts = async () => {
     try {
       const response = await fetch(
-        "http://localhost:5000/api/products"
+        "https://hunarhub-backend-hiv6.onrender.com/api/products"
       )
 
       const data = await response.json()
@@ -254,7 +254,7 @@ function ProductDashboard() {
 
     setImagePreview(
       product.image
-        ? `http://localhost:5000${product.image}`
+        ? `https://hunarhub-backend-hiv6.onrender.com${product.image}`
         : ""
     )
 
@@ -274,7 +274,7 @@ function ProductDashboard() {
 
     try {
       const response = await fetch(
-        `http://localhost:5000/api/products/${productId}`,
+        `https://hunarhub-backend-hiv6.onrender.com/api/products/${productId}`,
         {
           method: "DELETE",
           headers: {
@@ -501,7 +501,7 @@ function ProductDashboard() {
                       src={
                         product.image.startsWith("http")
                           ? product.image
-                          : `http://localhost:5000${product.image}`
+                          : `https://hunarhub-backend-hiv6.onrender.com${product.image}`
                       }
                       alt={product.name}
                       className="h-52 w-full object-cover"

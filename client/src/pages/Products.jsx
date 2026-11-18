@@ -14,7 +14,7 @@ function Products() {
     const fetchProducts = async () => {
       try {
         const response = await fetch(
-          "http://localhost:5000/api/products"
+          "https://hunarhub-backend-hiv6.onrender.com/api/products"
         )
 
         const data = await response.json()
@@ -43,7 +43,7 @@ useEffect(() => {
       const results = await Promise.all(
         products.map(async (product) => {
           const response = await fetch(
-            `http://localhost:5000/api/reviews/product/${product._id}`
+            `https://hunarhub-backend-hiv6.onrender.com/api/reviews/product/${product._id}`
           )
 
           if (!response.ok) {
@@ -153,7 +153,7 @@ useEffect(() => {
                 <div className="h-48 overflow-hidden bg-green-100">
                 {product.image ? (
                   <img
-                    src={`http://localhost:5000${product.image}`}
+                    src={`https://hunarhub-backend-hiv6.onrender.com${product.image}`}
                     alt={product.name}
                     className="h-full w-full object-cover"
                   />

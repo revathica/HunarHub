@@ -31,17 +31,17 @@ function AdminDashboard() {
           orderRes,
           userRes,
         ] = await Promise.all([
-          fetch("http://localhost:5000/api/entrepreneurs"),
+          fetch("https://hunarhub-backend-hiv6.onrender.com/api/entrepreneurs"),
 
-          fetch("http://localhost:5000/api/products"),
+          fetch("https://hunarhub-backend-hiv6.onrender.com/api/products"),
 
-          fetch("http://localhost:5000/api/orders", {
+          fetch("https://hunarhub-backend-hiv6.onrender.com/api/orders", {
             headers: {
               Authorization: `Bearer ${token}`,
             },
           }),
 
-          fetch("http://localhost:5000/api/users", {
+          fetch("https://hunarhub-backend-hiv6.onrender.com/api/users", {
             headers: {
               Authorization: `Bearer ${token}`,
             },
@@ -93,7 +93,7 @@ function AdminDashboard() {
       setVerifyingId(id)
 
       const response = await fetch(
-        `http://localhost:5000/api/entrepreneurs/verify/${id}`,
+        `https://hunarhub-backend-hiv6.onrender.com/api/entrepreneurs/verify/${id}`,
         {
           method: "PUT",
           headers: {
@@ -143,7 +143,7 @@ const handleToggleUserStatus = async (userId, currentStatus) => {
     setStatusUpdatingId(userId)
 
     const response = await fetch(
-      `http://localhost:5000/api/users/${userId}/status`,
+      `https://hunarhub-backend-hiv6.onrender.com/api/users/${userId}/status`,
       {
         method: "PUT",
         headers: {
@@ -190,7 +190,7 @@ const handleDeleteUser = async (userId) => {
 
   try {
     const response = await fetch(
-      `http://localhost:5000/api/users/${userId}`,
+      `https://hunarhub-backend-hiv6.onrender.com/api/users/${userId}`,
       {
         method: "DELETE",
         headers: {
@@ -230,7 +230,7 @@ const handleDeleteUser = async (userId) => {
 
     try {
       const response = await fetch(
-        `http://localhost:5000/api/products/${id}`,
+        `https://hunarhub-backend-hiv6.onrender.com/api/products/${id}`,
         {
           method: "DELETE",
           headers: {
@@ -269,7 +269,7 @@ const handleDeleteUser = async (userId) => {
 
     try {
       const response = await fetch(
-        `http://localhost:5000/api/products/${editingProduct._id}`,
+        `https://hunarhub-backend-hiv6.onrender.com/api/products/${editingProduct._id}`,
         {
           method: "PUT",
           headers: {

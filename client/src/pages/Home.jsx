@@ -2,7 +2,7 @@
 import { Link, useNavigate } from "react-router-dom"
 import { useState, useEffect } from "react"
 
-const API = "http://localhost:5000"
+const API = "https://hunarhub-backend-hiv6.onrender.com"
 
 function Home() {
   const navigate = useNavigate()
