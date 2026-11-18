@@ -35,7 +35,7 @@ function EntrepreneurDashboard() {
 
       try {
         const response = await fetch(
-          "https://hunarhub-backend-hiv6.onrender.com/api/users/me",
+          "https://hunarhub-backend-hjv6.onrender.com/api/users/me",
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -90,7 +90,7 @@ function EntrepreneurDashboard() {
 
     try {
       const response = await fetch(
-        `https://hunarhub-backend-hiv6.onrender.com/api/entrepreneurs/${profile._id}`,
+        `https://hunarhub-backend-hjv6.onrender.com/api/entrepreneurs/${profile._id}`,
         {
           method: "PUT",
           headers: {

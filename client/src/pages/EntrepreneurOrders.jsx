@@ -20,7 +20,7 @@ function EntrepreneurOrders() {
     const fetchOrders = async () => {
       try {
         const response = await fetch(
-          "https://hunarhub-backend-hiv6.onrender.com/api/orders",
+          "https://hunarhub-backend-hjv6.onrender.com/api/orders",
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -49,7 +49,7 @@ function EntrepreneurOrders() {
   const updateOrderStatus = async (orderId, status) => {
     try {
       const response = await fetch(
-        `https://hunarhub-backend-hiv6.onrender.com/api/orders/${orderId}`,
+        `https://hunarhub-backend-hjv6.onrender.com/api/orders/${orderId}`,
         {
           method: "PUT",
           headers: {

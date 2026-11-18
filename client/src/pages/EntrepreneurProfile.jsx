@@ -17,7 +17,7 @@ const [bookingLoading, setBookingLoading] = useState(false)
     const fetchEntrepreneur = async () => {
       try {
         const response = await fetch(
-          `https://hunarhub-backend-hiv6.onrender.com/api/entrepreneurs/${id}`
+          `https://hunarhub-backend-hjv6.onrender.com/api/entrepreneurs/${id}`
         )
 
         const data = await response.json()
@@ -60,7 +60,7 @@ const [bookingLoading, setBookingLoading] = useState(false)
     setBookingMessage("")
 
     const response = await fetch(
-      "https://hunarhub-backend-hiv6.onrender.com/api/service-requests",
+      "https://hunarhub-backend-hjv6.onrender.com/api/service-requests",
       {
         method: "POST",
         headers: {

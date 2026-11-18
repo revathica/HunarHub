@@ -21,7 +21,7 @@ function CreateBusinessProfile() {
 
   try {
     const response = await fetch(
-      "https://hunarhub-backend-hiv6.onrender.com/api/entrepreneurs",
+      "https://hunarhub-backend-hjv6.onrender.com/api/entrepreneurs",
       {
         method: "POST",
         headers: {

@@ -22,7 +22,7 @@ function Review() {
 
       try {
         const response = await fetch(
-          `https://hunarhub-backend-hiv6.onrender.com/api/orders/${orderId}`,
+          `https://hunarhub-backend-hjv6.onrender.com/api/orders/${orderId}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -85,7 +85,7 @@ const handleSubmit = async (e) => {
     }
 
     const response = await fetch(
-      "https://hunarhub-backend-hiv6.onrender.com/api/reviews",
+      "https://hunarhub-backend-hjv6.onrender.com/api/reviews",
       {
         method: "POST",
         headers: {

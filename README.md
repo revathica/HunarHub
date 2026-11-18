@@ -152,7 +152,7 @@ node server.js
 The backend runs at:
 
 ```text
-http://localhost:5000
+https://hunarhub-backend-hjv6.onrender.com
 ```
 
 ### 7. Start the Frontend

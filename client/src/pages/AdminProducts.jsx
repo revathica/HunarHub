@@ -25,7 +25,7 @@ function AdminProducts() {
 
     try {
       const response = await fetch(
-        "https://hunarhub-backend-hiv6.onrender.com/api/products",
+        "https://hunarhub-backend-hjv6.onrender.com/api/products",
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -60,7 +60,7 @@ function AdminProducts() {
       setDeletingId(productId)
 
       const response = await fetch(
-        `https://hunarhub-backend-hiv6.onrender.com/api/products/${productId}`,
+        `https://hunarhub-backend-hjv6.onrender.com/api/products/${productId}`,
         {
           method: "DELETE",
           headers: {
@@ -99,7 +99,7 @@ function AdminProducts() {
       setEditImage(null)
       setEditImagePreview(
         product.image
-          ? `https://hunarhub-backend-hiv6.onrender.com${product.image}`
+          ? `https://hunarhub-backend-hjv6.onrender.com${product.image}`
           : ""
       )
     }
@@ -122,7 +122,7 @@ function AdminProducts() {
       formData.append("image", editImage)
 
       const uploadResponse = await fetch(
-        "https://hunarhub-backend-hiv6.onrender.com/api/products/upload-image",
+        "https://hunarhub-backend-hjv6.onrender.com/api/products/upload-image",
         {
           method: "POST",
           headers: {
@@ -143,7 +143,7 @@ function AdminProducts() {
     }
 
     const response = await fetch(
-      `https://hunarhub-backend-hiv6.onrender.com/api/products/${editingProduct._id}`,
+      `https://hunarhub-backend-hjv6.onrender.com/api/products/${editingProduct._id}`,
       {
         method: "PUT",
         headers: {

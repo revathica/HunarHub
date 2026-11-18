@@ -18,7 +18,7 @@ function Register() {
 
     try {
       const response = await fetch(
-        "https://hunarhub-backend-hiv6.onrender.com/api/auth/register",
+        "https://hunarhub-backend-hjv6.onrender.com/api/auth/register",
         {
           method: "POST",
           headers: {

@@ -20,7 +20,7 @@ function AdminEntrepreneurs() {
 
     try {
       const response = await fetch(
-        "https://hunarhub-backend-hiv6.onrender.com/api/entrepreneurs",
+        "https://hunarhub-backend-hjv6.onrender.com/api/entrepreneurs",
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -55,7 +55,7 @@ function AdminEntrepreneurs() {
     setDeletingId(entrepreneurId)
 
     const response = await fetch(
-      `https://hunarhub-backend-hiv6.onrender.com/api/entrepreneurs/${entrepreneurId}`,
+      `https://hunarhub-backend-hjv6.onrender.com/api/entrepreneurs/${entrepreneurId}`,
       {
         method: "DELETE",
         headers: {
@@ -103,7 +103,7 @@ const handleUpdate = async (e) => {
     setSaving(true)
 
     const response = await fetch(
-      `https://hunarhub-backend-hiv6.onrender.com/api/entrepreneurs/${editingEntrepreneur._id}`,
+      `https://hunarhub-backend-hjv6.onrender.com/api/entrepreneurs/${editingEntrepreneur._id}`,
       {
         method: "PUT",
         headers: {

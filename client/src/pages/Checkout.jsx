@@ -49,7 +49,7 @@ function Checkout() {
 
     try {
       const response = await fetch(
-        "https://hunarhub-backend-hiv6.onrender.com/api/orders",
+        "https://hunarhub-backend-hjv6.onrender.com/api/orders",
         {
           method: "POST",
           headers: {

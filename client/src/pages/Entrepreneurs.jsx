@@ -14,7 +14,7 @@ function Entrepreneurs() {
     const fetchEntrepreneurs = async () => {
       try {
         const response = await fetch(
-          "https://hunarhub-backend-hiv6.onrender.com/api/entrepreneurs"
+          "https://hunarhub-backend-hjv6.onrender.com/api/entrepreneurs"
         )
 
         const data = await response.json()
@@ -39,7 +39,7 @@ function Entrepreneurs() {
       const results = await Promise.all(
         entrepreneurs.map(async (entrepreneur) => {
           const response = await fetch(
-            `https://hunarhub-backend-hiv6.onrender.com/api/reviews/${entrepreneur._id}`
+            `https://hunarhub-backend-hjv6.onrender.com/api/reviews/${entrepreneur._id}`
           )
 
           if (!response.ok) {

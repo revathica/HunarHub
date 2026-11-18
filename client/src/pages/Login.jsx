@@ -14,7 +14,7 @@ function Login() {
     setLoading(true)
 
     try {
-      const response = await fetch("https://hunarhub-backend-hiv6.onrender.com/api/auth/login", {
+      const response = await fetch("https://hunarhub-backend-hjv6.onrender.com/api/auth/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
