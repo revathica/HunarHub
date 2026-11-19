@@ -206,6 +206,9 @@ The backend provides REST API modules for:
 ## Author
 
 Developed as part of the Unified Mentor internship program to promote local businesses and empower micro-entrepreneurs through digital technology.
+## 🌐 Live Demo
+
+Live Website: [Click here to watch the Live Website](https://hunar-hub-dusky.vercel.app/)
 ## Project Demo Video
 
 Watch the HunarHub Project Demo:
