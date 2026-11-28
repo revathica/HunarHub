@@ -108,30 +108,49 @@ function Home() {
 
 
       {/* Categories */}
-      <section className="px-6 py-16">
-        <h2 className="text-3xl font-bold text-center text-green-800">
-          Explore Categories
-        </h2>
+     
+<section className="px-4 sm:px-6 py-16 md:py-20 bg-green-50/60">
+  <div className="max-w-7xl mx-auto">
 
-        <p className="mt-3 text-center text-gray-500">
-          Discover traditional skills and handmade creations
-        </p>
+    <div className="text-center mb-10">
+      <span className="inline-block px-4 py-1.5 rounded-full bg-green-100 text-green-700 text-sm font-semibold mb-4">
+        Discover Local Talent
+      </span>
 
-        <div className="mt-10 grid grid-cols-2 md:grid-cols-5 gap-5 max-w-6xl mx-auto">
-          {categories.map((category) => (
-            <Link
-              key={category.name}
-              to={`/entrepreneurs?category=${encodeURIComponent(category.skill)}`}
-              className="rounded-xl bg-white p-6 text-center shadow-sm hover:shadow-lg hover:-translate-y-1 transition"
-            >
-              <div className="text-4xl">{category.icon}</div>
-              <h3 className="mt-3 font-semibold text-green-800">
-                {category.name}
-              </h3>
-            </Link>
-          ))}
-        </div>
-      </section>
+      <h2 className="text-3xl md:text-4xl font-bold text-green-800">
+        Explore Categories
+      </h2>
+
+      <p className="mt-3 text-gray-600 text-sm sm:text-base max-w-xl mx-auto">
+        Discover traditional skills and handmade creations from
+        talented local entrepreneurs.
+      </p>
+    </div>
+
+    <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 sm:gap-6">
+      {categories.map((category) => (
+        <Link
+          key={category.name}
+          to={`/entrepreneurs?category=${encodeURIComponent(category.skill)}`}
+          className="group bg-white rounded-2xl p-5 sm:p-7 text-center border border-green-100 shadow-sm hover:shadow-xl hover:-translate-y-2 hover:border-green-300 transition-all duration-300"
+        >
+          <div className="w-16 h-16 sm:w-20 sm:h-20 mx-auto rounded-2xl bg-green-50 flex items-center justify-center text-4xl sm:text-5xl group-hover:bg-green-100 group-hover:scale-110 transition-all duration-300">
+            {category.icon}
+          </div>
+
+          <h3 className="mt-4 font-bold text-green-800 text-sm sm:text-base group-hover:text-green-600 transition">
+            {category.name}
+          </h3>
+
+          <p className="mt-2 text-xs text-gray-500">
+            Explore Now
+          </p>
+        </Link>
+      ))}
+    </div>
+
+  </div>
+</section>
 
       {/* Featured Entrepreneurs */}
       <section className="px-6 py-16 bg-white">
