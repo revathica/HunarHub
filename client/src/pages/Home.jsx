@@ -67,37 +67,45 @@ function Home() {
     <div className="min-h-screen bg-green-50">
 
       {/* Hero Section */}
-      <section className="px-6 py-24 text-center bg-gradient-to-r from-green-100 to-green-50">
-        <p className="mb-4 font-semibold text-green-700">
-          🌿 Empowering Local Entrepreneurs
-        </p>
+     
+{/* Hero Section */}
+<section className="w-full bg-gradient-to-r from-green-100 to-green-50 px-4 sm:px-6 py-16 sm:py-20 md:py-24 text-center">
 
-        <h1 className="text-4xl md:text-6xl font-bold text-green-800">
-          Welcome to HunarHub
-        </h1>
+  <p className="mb-4 font-semibold text-green-700 text-sm sm:text-base">
+    🌿 Empowering Local Entrepreneurs
+  </p>
 
-        <p className="mt-6 text-lg text-gray-600">
-          Discover Local Talent. Support Local Businesses.
-        </p>
+  <h1 className="text-3xl sm:text-4xl md:text-6xl font-bold text-green-800 leading-tight">
+    Welcome to HunarHub
+  </h1>
 
-        <p className="mt-3 text-gray-500">
-          Explore handmade products and connect with skilled local entrepreneurs.
-        </p>
+  <p className="mt-5 text-base sm:text-lg md:text-xl text-gray-600 max-w-3xl mx-auto">
+    Discover Local Talent. Support Local Businesses.
+  </p>
 
-        <Link
-          to="/entrepreneurs"
-          className="mt-8 inline-block rounded-lg bg-green-600 px-8 py-3 font-semibold text-white shadow hover:bg-green-700 transition"
-        >
-          Explore Entrepreneurs →
-        </Link>
+  <p className="mt-3 text-sm sm:text-base text-gray-500 max-w-2xl mx-auto">
+    Explore handmade products and connect with skilled local entrepreneurs.
+  </p>
 
-        <Link
-          to="/products"
-          className="mt-4 ml-3 inline-block rounded-lg border-2 border-green-600 px-8 py-3 font-semibold text-green-700 hover:bg-green-100 transition"
-        >
-          Shop Products
-        </Link>
-      </section>
+  <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
+
+    <Link
+      to="/entrepreneurs"
+      className="w-full sm:w-auto rounded-lg bg-green-600 px-8 py-3 font-semibold text-white shadow hover:bg-green-700 transition text-center"
+    >
+      Explore Entrepreneurs →
+    </Link>
+
+    <Link
+      to="/products"
+      className="w-full sm:w-auto rounded-lg border-2 border-green-600 px-8 py-3 font-semibold text-green-700 hover:bg-green-100 transition text-center"
+    >
+      Shop Products
+    </Link>
+
+  </div>
+</section>
+
 
       {/* Categories */}
       <section className="px-6 py-16">
