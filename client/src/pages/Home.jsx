@@ -152,62 +152,84 @@ function Home() {
   </div>
 </section>
 
-      {/* Featured Entrepreneurs */}
-      <section className="px-6 py-16 bg-white">
-        <h2 className="text-3xl font-bold text-center text-green-800">
-          Featured Entrepreneurs
-        </h2>
+  
+      
+{/* Featured Entrepreneurs */}
+<section className="px-4 sm:px-6 py-16 md:py-20 bg-white">
+  <div className="max-w-7xl mx-auto">
 
-        <p className="mt-3 text-center text-gray-500">
-          Meet the talented people behind local businesses
-        </p>
+    <div className="text-center mb-10">
+      <span className="inline-block px-4 py-1.5 rounded-full bg-green-100 text-green-700 text-sm font-semibold mb-4">
+        Local Business Owners
+      </span>
 
-        {loading ? (
-          <p className="text-center mt-10">Loading entrepreneurs...</p>
-        ) : (
-          <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 max-w-6xl mx-auto">
-            {entrepreneurs.map((item) => (
-              <div
-                key={item._id}
-                className="rounded-xl bg-green-50 p-5 text-center shadow-sm hover:shadow-lg transition"
-              >
-                {getImage(item.profileImage) ? (
-                  <img
-                    src={getImage(item.profileImage)}
-                    alt={item.businessName}
-                    className="w-24 h-24 rounded-full object-cover mx-auto"
-                  />
-                ) : (
-                  <div className="w-24 h-24 rounded-full bg-green-200 flex items-center justify-center text-4xl mx-auto">
-                    👨‍🔧
-                  </div>
-                )}
+      <h2 className="text-3xl md:text-4xl font-bold text-green-800">
+        Featured Entrepreneurs
+      </h2>
 
-                <h3 className="mt-4 font-bold text-green-800">
-                  {item.businessName}
-                </h3>
+      <p className="mt-3 text-gray-500 text-sm sm:text-base">
+        Meet the talented people behind local businesses
+      </p>
+    </div>
 
-                <p className="mt-2 text-sm text-gray-600">
-                  {item.skillType}
-                </p>
-
-                <p className="mt-1 text-sm text-gray-500">
-                  📍 {item.location}
-                </p>
-              </div>
-            ))}
-          </div>
-        )}
-
-        <div className="text-center mt-10">
-          <Link
-            to="/entrepreneurs"
-            className="font-semibold text-green-700 hover:underline"
+    {loading ? (
+      <p className="text-center mt-10 text-gray-500">
+        Loading entrepreneurs...
+      </p>
+    ) : entrepreneurs.length === 0 ? (
+      <p className="text-center mt-10 text-gray-500">
+        No entrepreneurs available at the moment.
+      </p>
+    ) : (
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        {entrepreneurs.map((item) => (
+          <div
+            key={item._id}
+            className="group bg-green-50 rounded-2xl p-6 text-center border border-green-100 shadow-sm hover:shadow-xl hover:-translate-y-2 hover:border-green-300 transition-all duration-300"
           >
-            View All Entrepreneurs →
-          </Link>
-        </div>
-      </section>
+            <div className="w-28 h-28 mx-auto rounded-full p-1 bg-white shadow-md group-hover:scale-105 transition duration-300">
+              {getImage(item.profileImage) ? (
+                <img
+                  src={getImage(item.profileImage)}
+                  alt={item.businessName}
+                  className="w-full h-full rounded-full object-cover"
+                />
+              ) : (
+                <div className="w-full h-full rounded-full bg-green-200 flex items-center justify-center text-5xl">
+                  👨‍🔧
+                </div>
+              )}
+            </div>
+
+            <h3 className="mt-5 font-bold text-lg text-green-800 group-hover:text-green-600 transition">
+              {item.businessName}
+            </h3>
+
+            <p className="mt-2 inline-block px-3 py-1 rounded-full bg-white text-sm text-green-700 font-medium">
+              {item.skillType}
+            </p>
+
+            <p className="mt-3 text-sm text-gray-500">
+              📍 {item.location}
+            </p>
+          </div>
+        ))}
+      </div>
+    )}
+
+    <div className="text-center mt-12">
+      <Link
+        to="/entrepreneurs"
+        className="inline-flex items-center gap-2 bg-green-700 text-white px-7 py-3 rounded-full font-semibold hover:bg-green-800 hover:shadow-lg transition"
+      >
+        View All Entrepreneurs
+        <span>→</span>
+      </Link>
+    </div>
+
+  </div>
+</section>
+
 
       {/* Featured Products */}
       <section className="px-6 py-16 bg-green-50">
