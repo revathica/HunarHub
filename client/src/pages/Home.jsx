@@ -387,23 +387,48 @@ function Home() {
 </section>
 
       {/* Footer */}
-      <footer className="bg-green-900 text-white px-6 py-10 text-center">
-        <h2 className="text-2xl font-bold">HunarHub 🌿</h2>
+     
+{/* Footer */}
+<footer className="bg-green-950 text-white px-5 sm:px-8 py-12">
+  <div className="max-w-7xl mx-auto">
 
-        <p className="mt-3 text-green-100">
-          Discover Local Talent. Support Local Businesses.
-        </p>
+    <div className="text-center">
+      <h2 className="text-3xl font-bold tracking-wide">
+        HunarHub <span>🌿</span>
+      </h2>
 
-        <div className="mt-5 flex justify-center gap-6 flex-wrap text-sm">
-          <Link to="/" className="hover:text-green-300">Home</Link>
-          <Link to="/entrepreneurs" className="hover:text-green-300">Entrepreneurs</Link>
-          <Link to="/products" className="hover:text-green-300">Products</Link>
-        </div>
+      <p className="mt-4 text-green-100 text-sm sm:text-base max-w-md mx-auto leading-relaxed">
+        Discover Local Talent. Support Local Businesses.
+      </p>
+    </div>
 
-        <p className="mt-8 text-sm text-green-200">
-          © {new Date().getFullYear()} HunarHub. All rights reserved.
-        </p>
-      </footer>
+    <div className="mt-8 flex justify-center items-center gap-6 sm:gap-10 flex-wrap text-sm font-medium">
+      <Link to="/" className="text-green-100 hover:text-white hover:underline underline-offset-4 transition">
+        Home
+      </Link>
+
+      <Link to="/entrepreneurs" className="text-green-100 hover:text-white hover:underline underline-offset-4 transition">
+        Entrepreneurs
+      </Link>
+
+      <Link to="/products" className="text-green-100 hover:text-white hover:underline underline-offset-4 transition">
+        Products
+      </Link>
+    </div>
+
+    <div className="mt-10 border-t border-green-800 pt-6 text-center">
+      <p className="text-xs sm:text-sm text-green-200">
+        © {new Date().getFullYear()} HunarHub. All rights reserved.
+      </p>
+
+      <p className="mt-2 text-xs text-green-300">
+        Made with ❤️ to support local entrepreneurs.
+      </p>
+    </div>
+
+  </div>
+</footer>
+
 
     </div>
   )
