@@ -319,45 +319,72 @@ function Home() {
 
 
       {/* Why HunarHub */}
-      <section className="px-6 py-16 bg-white">
-        <h2 className="text-3xl font-bold text-center text-green-800">
-          Why Choose HunarHub?
-        </h2>
+      
+{/* Why Choose HunarHub */}
+<section className="px-4 sm:px-6 py-16 md:py-20 bg-white">
+  <div className="max-w-7xl mx-auto">
 
-        <div className="mt-10 grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto text-center">
+    <div className="text-center mb-12">
+      <span className="inline-block px-4 py-1.5 rounded-full bg-green-100 text-green-700 text-sm font-semibold mb-4">
+        Our Promise
+      </span>
 
-          <div className="p-6 rounded-xl bg-green-50">
-            <div className="text-4xl">🤝</div>
-            <h3 className="mt-4 font-bold text-green-800">
-              Support Local Talent
-            </h3>
-            <p className="mt-2 text-gray-600">
-              Help local entrepreneurs grow their businesses.
-            </p>
-          </div>
+      <h2 className="text-3xl md:text-4xl font-bold text-green-800">
+        Why Choose HunarHub?
+      </h2>
 
-          <div className="p-6 rounded-xl bg-green-50">
-            <div className="text-4xl">🎨</div>
-            <h3 className="mt-4 font-bold text-green-800">
-              Handmade Products
-            </h3>
-            <p className="mt-2 text-gray-600">
-              Discover unique products made with creativity and care.
-            </p>
-          </div>
+      <p className="mt-3 text-gray-500 text-sm sm:text-base">
+        A platform that connects creativity, talent and community.
+      </p>
+    </div>
 
-          <div className="p-6 rounded-xl bg-green-50">
-            <div className="text-4xl">📦</div>
-            <h3 className="mt-4 font-bold text-green-800">
-              Easy Shopping
-            </h3>
-            <p className="mt-2 text-gray-600">
-              Explore products and connect with skilled creators.
-            </p>
-          </div>
+    <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
 
+      <div className="group p-8 rounded-2xl bg-green-50 border border-green-100 text-center hover:shadow-xl hover:-translate-y-2 transition-all duration-300">
+        <div className="w-20 h-20 mx-auto rounded-2xl bg-white flex items-center justify-center text-5xl shadow-sm group-hover:scale-110 transition duration-300">
+          🤝
         </div>
-      </section>
+
+        <h3 className="mt-6 text-xl font-bold text-green-800">
+          Support Local Talent
+        </h3>
+
+        <p className="mt-3 text-gray-600 leading-relaxed">
+          Help local entrepreneurs grow their businesses.
+        </p>
+      </div>
+
+      <div className="group p-8 rounded-2xl bg-green-50 border border-green-100 text-center hover:shadow-xl hover:-translate-y-2 transition-all duration-300">
+        <div className="w-20 h-20 mx-auto rounded-2xl bg-white flex items-center justify-center text-5xl shadow-sm group-hover:scale-110 transition duration-300">
+          🎨
+        </div>
+
+        <h3 className="mt-6 text-xl font-bold text-green-800">
+          Handmade Products
+        </h3>
+
+        <p className="mt-3 text-gray-600 leading-relaxed">
+          Discover unique products made with creativity and care.
+        </p>
+      </div>
+
+      <div className="group p-8 rounded-2xl bg-green-50 border border-green-100 text-center hover:shadow-xl hover:-translate-y-2 transition-all duration-300">
+        <div className="w-20 h-20 mx-auto rounded-2xl bg-white flex items-center justify-center text-5xl shadow-sm group-hover:scale-110 transition duration-300">
+          📦
+        </div>
+
+        <h3 className="mt-6 text-xl font-bold text-green-800">
+          Easy Shopping
+        </h3>
+
+        <p className="mt-3 text-gray-600 leading-relaxed">
+          Explore products and connect with skilled creators.
+        </p>
+      </div>
+
+    </div>
+  </div>
+</section>
 
       {/* Footer */}
       <footer className="bg-green-900 text-white px-6 py-10 text-center">
