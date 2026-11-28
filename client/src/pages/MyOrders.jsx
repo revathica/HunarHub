@@ -54,42 +54,65 @@ const confirmDelivery = async (orderId) => {
     setUpdatingOrderId(null)
   }
 }
-  useEffect(() => {
-    const fetchOrders = async () => {
-      const token = localStorage.getItem("token")
+ 
+useEffect(() => {
+  let isMounted = true
 
-      if (!token) {
-        navigate("/login")
-        return
+  const fetchOrders = async (initialLoad = false) => {
+    const token = localStorage.getItem("token")
+
+    if (!token) {
+      navigate("/login")
+      return
+    }
+
+    try {
+      const response = await fetch(
+        "https://hunarhub-backend-hjv6.onrender.com/api/orders",
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      )
+
+      const data = await response.json()
+
+      if (!response.ok) {
+        throw new Error(data.message || "Failed to fetch orders")
       }
 
-      try {
-        const response = await fetch(
-          "https://hunarhub-backend-hjv6.onrender.com/api/orders",
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        )
-
-        const data = await response.json()
-
-        if (!response.ok) {
-          throw new Error(data.message || "Failed to fetch orders")
-        }
-
+      if (isMounted) {
         setOrders(data)
-      } catch (error) {
-        console.error(error)
+        setError("")
+      }
+    } catch (error) {
+      console.error("Order refresh error:", error)
+
+      if (isMounted && initialLoad) {
         setError(error.message)
-      } finally {
+      }
+    } finally {
+      if (isMounted && initialLoad) {
         setLoading(false)
       }
     }
+  }
 
-    fetchOrders()
-  }, [navigate])
+  // Initial order loading
+  fetchOrders(true)
+
+  // Automatically refresh orders every 5 seconds
+  const refreshInterval = setInterval(() => {
+    fetchOrders(false)
+  }, 5000)
+
+  // Cleanup when leaving the page
+  return () => {
+    isMounted = false
+    clearInterval(refreshInterval)
+  }
+}, [navigate])
 
   if (loading) {
     return (
