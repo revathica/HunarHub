@@ -232,63 +232,91 @@ function Home() {
 
 
       {/* Featured Products */}
-      <section className="px-6 py-16 bg-green-50">
-        <h2 className="text-3xl font-bold text-center text-green-800">
-          Featured Products
-        </h2>
+      
+{/* Featured Products */}
+<section className="px-4 sm:px-6 py-16 md:py-20 bg-green-50">
+  <div className="max-w-7xl mx-auto">
 
-        <p className="mt-3 text-center text-gray-500">
-          Beautiful handmade products from local creators
-        </p>
+    <div className="text-center mb-10">
+      <span className="inline-block px-4 py-1.5 rounded-full bg-white text-green-700 text-sm font-semibold mb-4">
+        Handmade With Love
+      </span>
 
-        {loading ? (
-          <p className="text-center mt-10">Loading products...</p>
-        ) : (
-          <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 max-w-6xl mx-auto">
-            {products.map((item) => (
-              <div
-                key={item._id}
-                className="rounded-xl bg-white overflow-hidden shadow-sm hover:shadow-lg transition"
-              >
-                {getImage(item.image || item.imageUrl) ? (
-                  <img
-                    src={getImage(item.image || item.imageUrl)}
-                    alt={item.name}
-                    className="w-full h-48 object-cover"
-                  />
-                ) : (
-                  <div className="w-full h-48 bg-green-100 flex items-center justify-center text-5xl">
-                    🛍️
-                  </div>
-                )}
+      <h2 className="text-3xl md:text-4xl font-bold text-green-800">
+        Featured Products
+      </h2>
 
-                <div className="p-5">
-                  <h3 className="font-bold text-green-800">
-                    {item.name}
-                  </h3>
+      <p className="mt-3 text-gray-600 text-sm sm:text-base">
+        Beautiful handmade products from local creators
+      </p>
+    </div>
 
-                  <p className="mt-2 text-gray-600 text-sm line-clamp-2">
-                    {item.description}
-                  </p>
-
-                  <p className="mt-3 text-lg font-bold text-green-700">
-                    ₹{item.price}
-                  </p>
-                </div>
-              </div>
-            ))}
-          </div>
-        )}
-
-        <div className="text-center mt-10">
-          <Link
-            to="/products"
-            className="font-semibold text-green-700 hover:underline"
+    {loading ? (
+      <p className="text-center mt-10 text-gray-500">
+        Loading products...
+      </p>
+    ) : products.length === 0 ? (
+      <p className="text-center mt-10 text-gray-500">
+        No products available at the moment.
+      </p>
+    ) : (
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        {products.map((item) => (
+          <div
+            key={item._id}
+            className="group bg-white rounded-2xl overflow-hidden border border-green-100 shadow-sm hover:shadow-xl hover:-translate-y-2 transition-all duration-300"
           >
-            View All Products →
-          </Link>
-        </div>
-      </section>
+            <div className="relative overflow-hidden">
+              {getImage(item.image || item.imageUrl) ? (
+                <img
+                  src={getImage(item.image || item.imageUrl)}
+                  alt={item.name}
+                  className="w-full h-52 object-cover group-hover:scale-110 transition-transform duration-500"
+                />
+              ) : (
+                <div className="w-full h-52 bg-green-100 flex items-center justify-center text-6xl">
+                  🛍️
+                </div>
+              )}
+
+              <span className="absolute top-3 left-3 bg-white/95 text-green-700 text-xs font-semibold px-3 py-1.5 rounded-full shadow-sm">
+                Handmade
+              </span>
+            </div>
+
+            <div className="p-5">
+              <h3 className="font-bold text-lg text-green-800 line-clamp-1">
+                {item.name}
+              </h3>
+
+              <p className="mt-2 text-gray-500 text-sm line-clamp-2 min-h-10">
+                {item.description}
+              </p>
+
+              <div className="mt-4 pt-3 border-t border-green-100">
+                <p className="text-xl font-bold text-green-700">
+                  ₹{item.price}
+                </p>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    )}
+
+    <div className="text-center mt-12">
+      <Link
+        to="/products"
+        className="inline-flex items-center gap-2 bg-green-700 text-white px-7 py-3 rounded-full font-semibold hover:bg-green-800 hover:shadow-lg transition"
+      >
+        View All Products
+        <span>→</span>
+      </Link>
+    </div>
+
+  </div>
+</section>
+
 
       {/* Why HunarHub */}
       <section className="px-6 py-16 bg-white">
